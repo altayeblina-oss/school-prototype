@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>School Portal – Clickable Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F7FB;--sf:#fff;--tx:#1B1D2A;--mu:#5B5F77;--bd:#E4E6EF;--ib:#BFC3D6;--ac:#4F46E5;--as:#E8E7FD;--at:#3730A3;--okb:#E1F5EA;--okt:#0B5F34;--wb:#FFF1D6;--wt:#7A4300;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1020;--sf:#181A2E;--tx:#ECEDF7;--mu:#A9ADC8;--bd:#2B2E4A;--ib:#4A4E73;--ac:#6558F0;--as:#26254F;--at:#C9C6FF;--okb:#123A27;--okt:#8EE5B5;--wb:#4A3410;--wt:#FFD58A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1020;--sf:#181A2E;--tx:#ECEDF7;--mu:#A9ADC8;--bd:#2B2E4A;--ib:#4A4E73;--ac:#6558F0;--as:#26254F;--at:#C9C6FF;--okb:#123A27;--okt:#8EE5B5;--wb:#4A3410;--wt:#FFD58A;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx)}h1,h2,h3,p,ol{margin:0}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;padding:14px 20px}
+.seg{display:inline-flex;border:1px solid var(--ib);border-radius:12px;overflow:hidden;background:var(--sf)}
+.seg button{border:0;background:none;color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:0 18px;height:44px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ac);color:#fff}
+.stage{margin:0 auto 24px;background:var(--bg);overflow:auto}
+.stage.phone{width:410px;max-width:100%;height:min(820px,calc(100dvh - 120px));border:10px solid #1B1D2A;border-radius:40px}
+.stage.desktop{width:calc(100% - 32px);max-width:1180px;border:1px solid var(--bd);border-radius:16px;min-height:700px}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}.logo{width:36px;height:36px;border-radius:10px;background:var(--ac);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.auth{display:grid;grid-template-columns:5fr 7fr;min-height:700px}.phone .auth{display:block;min-height:100%}
+.panel{background:#1E1B4B;color:#fff;padding:48px;display:flex;flex-direction:column;gap:20px}.panel p{color:#C7C9F5}.panel h2{font-size:36px;line-height:1.1;letter-spacing:-.03em}
+.vs{list-style:none;padding:0;display:flex;flex-direction:column;gap:14px;margin-top:20px;color:#C7C9F5}.vs li{display:flex;align-items:center;gap:12px}
+.vs span{width:30px;height:30px;border-radius:50%;border:1px solid #6B68B8;display:flex;align-items:center;justify-content:center;font-size:13px}.vs .cur{color:#fff;font-weight:600}.vs .cur span{background:#4F46E5;border-color:#4F46E5}.vs .dn span{background:#0B5F34;border-color:#0B5F34;color:#fff}
+.phone .panel,.desktop .pbrand{display:none}
+.fw{display:flex;justify-content:center;align-items:center;padding:32px 24px}.phone .fw{padding:0}
+.fc{width:100%;max-width:640px;display:flex;flex-direction:column;gap:20px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:32px}
+.phone .fc{border:0;border-radius:0;padding:16px 20px 28px;min-height:100%;max-width:none}
+.hd{display:flex;align-items:center;gap:12px}.hd:empty{display:none}
+.ibtn{width:44px;height:44px;border:1px solid var(--bd);border-radius:12px;background:var(--sf);color:var(--tx);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+h1{font-size:26px;font-weight:700;letter-spacing:-.02em}.mut{color:var(--mu);font-size:14px}.sm{font-size:12px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:20px}
+.lbl{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.iw{position:relative}.iw .ic{position:absolute;left:14px;top:14px;color:var(--mu);pointer-events:none}.iw .chev{left:auto;right:14px}
+.in{width:100%;height:48px;border:1px solid var(--ib);border-radius:12px;padding:0 14px 0 44px;font:inherit;font-size:15px;background:var(--sf);color:var(--tx);appearance:none;-webkit-appearance:none}
+.in:focus,.otp:focus{outline:2px solid var(--ac);outline-offset:1px}
+.col{display:flex;flex-direction:column;gap:16px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.phone .g2:not(.k){grid-template-columns:1fr}.g2.k{gap:12px}
+.btn{height:50px;border:0;border-radius:14px;background:var(--ac);color:#fff;font:inherit;font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;cursor:pointer}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn2{height:44px;border:1px solid var(--ib);border-radius:12px;background:var(--sf);color:var(--tx);font:inherit;font-weight:600;font-size:14px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}.btn2.ghost{border:0;background:none;color:var(--at)}.btn2:disabled{opacity:.5;cursor:not-allowed}
+.cta{display:flex;flex-direction:column;gap:8px;margin-top:auto}.desktop .cta{margin-top:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;background:var(--as);color:var(--at);font-size:13px;font-weight:600;white-space:nowrap}.chip .ic{width:16px;height:16px}.chip.ok{background:var(--okb);color:var(--okt)}.chip.wn{background:var(--wb);color:var(--wt)}
+.pg{display:flex;gap:6px}.pg i{flex:1;height:6px;border-radius:6px;background:var(--bd)}.pg i.on{background:var(--ac)}
+.tile{width:40px;height:40px;border-radius:12px;background:var(--as);color:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}
+.up{display:flex;align-items:center;gap:12px;border:1px dashed var(--ib);border-radius:14px;padding:12px}.up b{font-size:14px}
+.note{display:flex;gap:10px;background:var(--as);border-radius:12px;padding:12px;font-size:13px;color:var(--at)}
+.otps{display:flex;justify-content:space-between;gap:8px}.otp{width:100%;max-width:56px;height:56px;border:1px solid var(--ib);border-radius:12px;text-align:center;font:inherit;font-size:22px;font-weight:600;background:var(--sf);color:var(--tx);padding:0}
+.rule{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--mu)}.rule.good{color:var(--okt)}
+.rd{display:flex;align-items:center;gap:8px;flex:1;border:1px solid var(--ib);border-radius:12px;padding:12px;font-size:14px;font-weight:500}
+.center{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}.big{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center}.big .ic{width:38px;height:38px}
+.tl{display:flex;gap:12px;padding:10px 0;color:var(--okt)}.tl.wn{color:var(--wt)}.tl p:first-child{font-weight:600;font-size:14px;color:var(--tx)}
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:700px}.phone .shell{display:block}.phone .side,.desktop .tabs{display:none}
+.side{background:var(--sf);border-right:1px solid var(--bd);padding:24px 16px;display:flex;flex-direction:column;gap:6px}
+.nav{display:flex;align-items:center;gap:12px;padding:12px 14px;border:0;background:none;border-radius:12px;font:inherit;font-size:15px;font-weight:500;color:var(--tx);cursor:pointer;text-align:left}.nav.on{background:var(--as);color:var(--at);font-weight:600}
+.main{padding:32px;display:flex;flex-direction:column;gap:20px}.phone .main{padding:16px 16px 20px}
+.top{display:none}.phone .top{display:flex;align-items:center;justify-content:space-between}
+.hero{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.svc button{border:1px solid var(--bd);background:var(--sf);color:var(--at);border-radius:16px;padding:16px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.info{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.desktop .info{grid-template-columns:repeat(4,1fr)}.info p:first-child{color:var(--mu);font-size:12px}.info p:last-child{font-weight:600;font-size:15px;margin-top:2px}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--bd)}
+.tabs{position:sticky;bottom:0;display:flex;padding:10px 8px;background:var(--sf);border-top:1px solid var(--bd)}.tabs button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:4px;font:inherit;font-size:11px;font-weight:600;color:var(--mu);min-height:44px;cursor:pointer}.tabs .on{color:var(--ac)}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#1B1D2A;color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header class="bar"><strong>Clickable prototype</strong>
+<div class="seg" role="group" aria-label="Device"><button type="button" data-mode="phone" aria-pressed="true"></button><button type="button" data-mode="desktop" aria-pressed="false"></button></div>
+<button class="btn2" type="button" data-go="login" id="restart"></button></header>
+<main><div id="stage" class="stage phone"><div id="screen"></div></div></main>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const P={user:'M12 12a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0',home:'M3 11l9-8 9 8v10H3z',book:'M4 4h12a4 4 0 014 4v12H8a4 4 0 01-4-4z',file:'M6 3h9l5 5v13H6zM14 3v6h6',card:'M3 6h18v12H3zM3 10h18',clip:'M9 3h6v4H9zM6 5h12v16H6z',ok:'M5 12l5 5 9-10',cal:'M4 6h16v15H4zM4 10h16M8 3v4M16 3v4',globe:'M12 21a9 9 0 100-18 9 9 0 000 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',cap:'M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5',id:'M3 5h18v14H3zM7 10a2 2 0 104 0 2 2 0 00-4 0M6 16c.5-2 4.5-2 5 0M14 10h4M14 14h4',mail:'M3 5h18v14H3zM3 6l9 7 9-7',phone:'M7 3h10v18H7zM11 18h2',lock:'M5 11h14v10H5zM8 11V7a4 4 0 018 0v4',up:'M12 16V4M7 9l5-5 5 5M4 20h16',shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',back:'M15 5l-7 7 7 7',clock:'M12 21a9 9 0 100-18 9 9 0 000 18zM12 7v5l3 2',users:'M9 11a3 3 0 100-6 3 3 0 000 6zM3 20a6 6 0 0112 0M17 11a3 3 0 100-6M21 20a6 6 0 00-4-5.6',bell:'M6 9a6 6 0 0112 0c0 6 3 7 3 7H3s3-1 3-7zM10 20h4',edit:'M4 20h4L19 9l-4-4L4 16zM14 6l4 4',okc:'M12 21a9 9 0 100-18 9 9 0 000 18zM8 12l3 3 5-6',down:'M6 9l6 6 6-6',pass:'M5 3h14v18H5zM12 13a3 3 0 100-6 3 3 0 000 6zM9 17h6',phn:'M3 7h18v10H3zM12 12h.01',desk:'M3 4h18v12H3zM8 20h8M12 16v4',redo:'M4 12a8 8 0 108-8M4 4v5h5'};
+const ic=(n,c='')=>`<svg class="ic ${c}" viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg>`;
+const SCHOOL='Al Noor International School',$=s=>document.querySelector(s);
+const brand=c=>`<div class="brand ${c||''}"><span class="logo">${ic('cap')}</span>${SCHOOL}</div>`;
+const avatar=s=>`<svg width="${s}" height="${s}" viewBox="0 0 96 96" role="img" aria-label="Student photo (placeholder)" style="border-radius:50%;flex:none"><rect width="96" height="96" fill="#DDD6FE"/><circle cx="48" cy="38" r="16" fill="#8B7CF6"/><path d="M16 96c2-22 16-32 32-32s30 10 32 32z" fill="#6D5BE8"/></svg>`;
+const f=(l,i,ph,o='user',t='text',h='')=>`<div><label class="lbl" for="${i}">${l}</label><div class="iw">${ic(o)}<input class="in" id="${i}" type="${t}" placeholder="${ph}">${t==='password'?'':''}</div>${h?`<p class="mut sm" style="margin-top:6px">${h}</p>`:''}</div>`;
+const sel=(l,i,opts,o)=>`<div><label class="lbl" for="${i}">${l}</label><div class="iw">${ic(o)}<select class="in" id="${i}">${opts.map(x=>`<option>${x}</option>`).join('')}</select>${ic('down','chev')}</div></div>`;
+const STEPS=['Student details','Documents','Parent / guardian','Password','OTP verification'];
+const prog=n=>`<div><div class="pg">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div><p class="mut" style="margin-top:10px;font-weight:600">Step ${n} of 5 · ${STEPS[n-1]}</p></div>`;
+const ttl=(t,s)=>`<div><h1 tabindex="-1">${t}</h1><p class="mut" style="margin-top:6px">${s}</p></div>`;
+const cta=(next,l='Continue')=>`<div class="cta"><button class="btn" type="button" data-go="${next}">${l}</button><button class="btn2 ghost" type="button" data-toast="Draft saved">Save draft & continue later</button></div>`;
+function auth(n,prev,inner){
+ const vs=n>0?`<ol class="vs">${STEPS.map((t,i)=>`<li class="${i+1===n?'cur':i+1<n?'dn':''}"><span>${i+1<n?ic('ok'):i+1}</span>${t}</li>`).join('')}</ol>`:'';
+ return `<div class="auth"><aside class="panel">${brand()}<h2 style="margin-top:24px">Start your journey<br>with us.</h2><p>Register once. Verify by OTP. Get your Student ID.</p>${vs}</aside><section class="fw"><div class="fc"><div class="hd">${prev?`<button class="ibtn" type="button" data-go="${prev}" aria-label="Back">${ic('back')}</button>`:''}${brand('pbrand')}</div>${inner}</div></section></div>`}
+const up=(n,r,d)=>`<div class="up"><span class="tile">${ic('file')}</span><div style="flex:1;min-width:0"><b>${n}</b><p class="mut sm">${r}</p></div>${d?`<span class="chip ok">${ic('ok')}Uploaded</span>`:`<button class="btn2" type="button" data-up style="height:38px;padding:0 12px;font-size:13px">${ic('up')}Upload</button>`}</div>`;
+const rule=(id,t)=>`<div class="rule" id="${id}">${ic('okc')}${t}</div>`;
+const tl=(t,s,w)=>`<div class="tl ${w?'wn':''}">${ic(w?'clock':'okc')}<div><p>${t}</p><p class="mut sm">${s}</p></div></div>`;
+const PERS=[['Full name','Sara Ahmed'],['Student ID','ST-000124'],['Date of birth','15 Mar 2005'],['Nationality','Nationality'],['Academic year','2026 / 2027'],['Grade','Grade 10'],['Guardian','Ahmed Khalid'],['Guardian mobile','+971 50 000 0000']];
+const NAVS=[['Dashboard','home'],['Classes','book'],['Exams','clip'],['Payments','card'],['Reports','file'],['Profile','user']];
+const S={
+s1:()=>auth(1,'login',prog(1)+ttl('Student details','Enter details exactly as shown on the official ID.')+`<div class="col"><div class="g2 k">${f('First name *','fn','First name')}${f('Last name *','ln','Last name')}</div><div class="g2">${f('Date of birth *','dob','DD / MM / YYYY','cal')}${sel('Nationality *','nt',['Select nationality'],'globe')}${sel('Gender (only if required)','gd',['Select'],'user')}${sel('Academic year *','ay',['2026 / 2027'],'cal')}</div>${sel('Applying for grade *','gr',['Select grade'],'cap')}<p class="mut sm">Grade eligibility is checked against the student’s age.</p></div>`+cta('s2')),
+s2:()=>auth(2,'s1',prog(2)+ttl('Identity & documents','Used by the school to verify the student.')+`<div class="col">${f('Emirates ID *','eid','784-0000-0000000-0','id','text','15 digits. Required for UAE residents.')}<div class="g2 k">${f('Passport no.','pp','A0000000','pass')}${f('Expiry','ppx','DD / MM / YY','cal')}</div></div><div><h3 style="font-size:16px">Upload documents</h3><p class="mut sm" style="margin:4px 0 12px">PDF, JPG or PNG · max 5 MB each</p><div class="col" style="gap:10px">${up('Emirates ID (front & back)','Required',1)}${up('Passport copy','Required')}${up('Birth certificate','Required')}${up('Previous school report / transfer certificate','If applicable')}${up('Parent / guardian ID','Required for minors')}</div></div>`+cta('s3')),
+s3:()=>auth(3,'s2',prog(3)+ttl('Parent / guardian','The responsible adult linked to this student.')+`<div class="col">${f('Full name *','pn','Enter full name')}${sel('Relationship *','rl',['Father','Mother','Legal guardian'],'users')}${f('Mobile number *','pm','+971 50 000 0000','phone','tel')}${f('Email *','pe','name@example.com','mail','email')}${f('Emirates ID / passport no. *','pid','ID number','id')}<div><p class="lbl">Send my verification code (OTP) to</p><div style="display:flex;gap:10px"><label class="rd"><input type="radio" name="oc" checked>Mobile (SMS)</label><label class="rd"><input type="radio" name="oc">Email</label></div></div><label style="display:flex;gap:10px;font-size:13px"><input type="checkbox" style="width:20px;height:20px;margin:0">I am authorized to register this student.</label></div>`+cta('s4')),
+s4:()=>auth(4,'s3',prog(4)+ttl('Create your password','You will use it to sign in with your Student ID.')+`<div class="col">${f('Password *','pw','Create password','lock','password')}${f('Confirm password *','pw2','Re-enter password','lock','password')}<div class="card col" style="padding:14px;gap:8px">${rule('r1','At least 8 characters')}${rule('r2','Upper & lowercase letters')}${rule('r3','A number and a symbol')}${rule('r4','Both passwords match')}</div><div class="note">${ic('shield')}<span>Already registered? <b>Sign in</b> or <b>recover your account</b>. We prevent duplicate student records.</span></div></div>`+cta('s5','Send verification code')),
+s5:()=>auth(5,'s4',prog(5)+`<div class="center" style="padding-top:8px"><span class="big" style="background:var(--as);color:var(--ac)">${ic('shield')}</span><h1 tabindex="-1">Verify your mobile</h1><p class="mut">Enter the 6-digit code sent to<br><b style="color:var(--tx)">+971 50 ••• ••67</b></p></div><div class="otps">${[1,2,3,4,5,6].map(i=>`<input class="otp" aria-label="Digit ${i}" maxlength="1" inputmode="numeric" autocomplete="one-time-code">`).join('')}</div><div class="center" style="gap:8px"><span class="chip wn">${ic('clock')}<span id="ex">Code expires in 4:32</span></span><p class="mut sm">3 attempts remaining</p><button class="btn2 ghost" type="button" id="rs" disabled>Resend in 00:30</button></div><div class="cta"><button class="btn" type="button" id="vb" data-go="done" disabled>Verify & submit</button><p class="mut sm" style="text-align:center">Prototype tip: type any 6 digits.</p></div>`),
+done:()=>auth(6,null,`<div class="center" style="padding-top:8px"><span class="big" style="background:var(--okb);color:var(--okt)">${ic('ok')}</span><h1 tabindex="-1">Application submitted</h1><p class="mut">Your contact is verified. The school will review the documents.</p></div><div class="card center" style="background:var(--as)"><p class="mut sm">Student ID</p><p style="font-size:28px;font-weight:700;letter-spacing:.04em;color:var(--at)">ST-000124</p><span class="chip wn">${ic('clock')}Pending school approval</span></div><div class="card" style="padding:8px 16px">${tl('Student details','Completed')}${tl('Documents','Uploaded · under review')}${tl('Contact verified','OTP confirmed')}${tl('School approval','You will be notified by SMS and email',1)}</div><div class="cta"><button class="btn" type="button" data-go="login">Go to sign in</button><button class="btn2" type="button" data-toast="Status tracking is not part of this prototype">Track application status</button></div>`),
+login:()=>auth(0,null,`<div class="col" style="gap:12px;padding-top:8px">${avatar(64)}<h1 tabindex="-1" style="font-size:28px">Welcome back</h1><p class="mut">Sign in with your Student ID or email.</p></div><div class="col">${f('Student ID or email','lid','ST-000000 or name@example.com')}${f('Password','lpw','Enter password','lock','password')}<button class="btn2 ghost" type="button" data-toast="Recovery is not part of this prototype" style="align-self:flex-end">Forgot password?</button><div class="note">${ic('shield')}<span>For your security we send a one-time code to your registered mobile after sign-in.</span></div></div><div class="cta"><button class="btn" type="button" data-go="profile">Sign in</button><p class="mut" style="text-align:center">New student? <button class="btn2 ghost" type="button" data-go="s1" style="height:auto;padding:0">Register</button></p></div>`),
+profile:()=>{
+ const doc=(n,t,c)=>`<div class="row"><span class="tile">${ic('file')}</span><b style="flex:1;font-size:14px">${n}</b><span class="chip ${c}">${t}</span></div>`;
+ return `<div class="shell"><aside class="side"><div style="margin:0 0 18px 6px">${brand()}</div>${NAVS.map(([n,i])=>`<button class="nav ${n==='Profile'?'on':''}" type="button" ${n==='Profile'?'':'data-toast="Screen not included in this prototype"'}>${ic(i)}${n}</button>`).join('')}</aside><div><div class="main"><div class="top">${brand()}<button class="ibtn" type="button" aria-label="Notifications" data-toast="No new notifications">${ic('bell')}</button></div>
+<div class="card hero">${avatar(80)}<div style="flex:1;min-width:160px"><h1 tabindex="-1">Sara Ahmed</h1><p class="mut" style="margin:4px 0 8px">ST-000124 · Grade 10 · ${SCHOOL}</p><span class="chip ok">${ic('okc')}Enrolled</span></div><button class="btn2" type="button" data-toast="Profile editing is a separate user story">${ic('edit')}Edit profile</button></div>
+<div class="svc">${[['Classes','book'],['Exams','clip'],['Reports','file'],['Payments','card']].map(([n,i])=>`<button type="button" data-toast="${n} screen not included"><span class="tile">${ic(i)}</span>${n}</button>`).join('')}</div>
+<div class="card"><h3 style="font-size:17px;margin-bottom:16px">Personal & academic info</h3><div class="info">${PERS.map(([a,b])=>`<div><p>${a}</p><p>${b}</p></div>`).join('')}</div></div>
+<div class="card"><h3 style="font-size:17px;margin-bottom:6px">My documents</h3>${doc('Emirates ID','Verified','ok')}${doc('Passport','Verified','ok')}${doc('Birth certificate','In review','wn')}</div></div>
+<nav class="tabs" aria-label="Main">${[['Home','home'],['Classes','book'],['Exams','clip'],['Payments','card'],['Profile','user']].map(([n,i])=>`<button type="button" class="${n==='Profile'?'on':''}" ${n==='Profile'?'':'data-toast="Screen not included"'}>${ic(i)}${n}</button>`).join('')}</nav></div></div>`}
+};
+let tm;
+function render(id){clearInterval(tm);const s=$('#screen');s.innerHTML=S[id]();$('#stage').scrollTop=0;const h=s.querySelector('h1');if(h)h.focus({preventScroll:true});
+ if(id==='s5'){let r=30,e=272;tm=setInterval(()=>{r=Math.max(0,r-1);e=Math.max(0,e-1);const a=$('#rs'),b=$('#ex');if(!a){clearInterval(tm);return}a.textContent=r?`Resend in 00:${String(r).padStart(2,'0')}`:'Resend code';a.disabled=r>0;b.textContent=`Code expires in ${Math.floor(e/60)}:${String(e%60).padStart(2,'0')}`},1000)}}
+function mode(m){$('#stage').className='stage '+m;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===m))}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function chk(){const a=$('#pw').value,b=$('#pw2').value,v={r1:a.length>=8,r2:/[a-z]/.test(a)&&/[A-Z]/.test(a),r3:/\d/.test(a)&&/[^\w\s]/.test(a),r4:!!b&&a===b};for(const k in v)$('#'+k).classList.toggle('good',v[k])}
+document.addEventListener('click',e=>{const m=e.target.closest('[data-mode]');if(m)return mode(m.dataset.mode);const g=e.target.closest('[data-go]');if(g)return render(g.dataset.go);const u=e.target.closest('[data-up]');if(u){u.outerHTML=`<span class="chip ok">${ic('ok')}Uploaded</span>`;return}const t=e.target.closest('[data-toast]');if(t)toast(t.dataset.toast)});
+document.addEventListener('input',e=>{const t=e.target;if(t.classList.contains('otp')){t.value=t.value.replace(/\D/g,'').slice(-1);if(t.value&&t.nextElementSibling)t.nextElementSibling.focus();$('#vb').disabled=![...document.querySelectorAll('.otp')].every(x=>x.value)}if(t.id==='pw'||t.id==='pw2')chk()});
+document.addEventListener('keydown',e=>{const t=e.target;if(e.key==='Backspace'&&t.classList&&t.classList.contains('otp')&&!t.value&&t.previousElementSibling)t.previousElementSibling.focus()});
+document.addEventListener('paste',e=>{const t=e.target;if(!t.classList||!t.classList.contains('otp'))return;e.preventDefault();const d=(e.clipboardData.getData('text')||'').replace(/\D/g,'').slice(0,6);document.querySelectorAll('.otp').forEach((x,i)=>x.value=d[i]||'');$('#vb').disabled=d.length<6});
+document.querySelector('[data-mode=phone]').innerHTML=ic('phn')+'Phone';document.querySelector('[data-mode=desktop]').innerHTML=ic('desk')+'Desktop';$('#restart').innerHTML=ic('redo')+'Restart';
+render('login');
+</script>
+</body>
+</html>
